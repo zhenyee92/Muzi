@@ -2,7 +2,7 @@
   "name": "muduo",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
+"type": "module",
   "scripts": {
     "start": "node app.js",
     "dev": "vite",
