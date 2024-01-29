@@ -54,14 +54,19 @@ jobs:
         run: unzip release.zip
         
       - name: Login to Azure using Service Principal
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-          enable-AzPSSession: true
+    uses: azure/login@v1
+      with:
+      creds: ${{ secrets.AZURE_CREDENTIALS }}
+      enable-AzPSSession: true
 
-      - name: Deploy to Azure Web App
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'muduo'
-          slot-name: 'Production'
-          package: .
+    - name: Deploy to Azure Web App
+    uses: azure/webapps-deploy@v2
+    with:
+    app-name: 'muduo'
+    slot-name: 'Production'
+    package: .
+
+    - name: Login to Azure CLI
+    run: az login --use-device-code
+
+
