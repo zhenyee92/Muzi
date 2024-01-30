@@ -42,7 +42,7 @@ jobs:
     needs: build
     environment:
       name: 'Production'
-      url: ${{ secrets.WEBAPP_URL }}  # 添加用于 Azure Web App 的 URL 到 Secrets
+      url: ${{ secrets.WEBAPP_URL }}
 
     steps:
       - name: Download artifact
