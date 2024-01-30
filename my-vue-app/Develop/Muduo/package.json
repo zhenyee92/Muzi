@@ -2,7 +2,6 @@
   "name": "muduo",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "start": "node app.js",
     "dev": "vite",
@@ -16,6 +15,6 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.2",
-    "vite": "^5.0.10"
+    "vite": "^5.0.12"
   }
 }
