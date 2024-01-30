@@ -52,21 +52,22 @@ jobs:
 
       - name: Unzip the artifact
         run: unzip release.zip
-        
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+
+      - name: Build Docker image
+        run: docker build -t my-node-app .
+
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Push Docker image to Docker Hub
+        run: docker push my-node-app
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'muduo'
           slot-name: 'Production'
-          package: .
+          images: 'my-node-app:latest'
 
       - name: Login to Azure CLI
         run: az login --use-device-code
